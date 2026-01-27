@@ -9,6 +9,7 @@ import NewsDesk from '@/components/NewsDesk';
 import Divider from '@/components/section/Divider';
 import EmotionNewsSection from '@/components/section/EmotionNewsSection';
 import { curationMock } from '@/mocks/curation.mock';
+import Tooltip from '@/components/Tooltip';
 
 export default function Home() {
   const [webtoons, setWebtoons] = useState(webtoonFeedMock.contents.slice(0, 5));
@@ -38,9 +39,10 @@ export default function Home() {
         <MainHeader />
         <div className="mx-auto w-full px-4">
           <div className="flex h-122.5 flex-col justify-center">
-            <div className="h- mb-4 flex h-[26px] items-center">
+            <div className="mb-4 flex h-[26px] items-center gap-1">
               <h3 className="typo-h3">오늘의 뉴스낵</h3>
-              <img src="/info.svg" alt="info" className="ml-1 h-6 w-6" />
+
+              <Tooltip />
             </div>
             <NewsDesk />
           </div>
