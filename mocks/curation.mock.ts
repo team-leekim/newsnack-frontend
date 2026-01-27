@@ -26,7 +26,7 @@ export const curationMock: EmotionNewsItem[] = [
     publishedAt: '2026-01-22 09:30',
     imageUrl:
       'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTZfMTUz%2FMDAxNzI5MDUzMTY2MzUw.LogQtODfY6TgUCBh_w_XvYl9Xi_EXAs11ElsRWK3Fm0g.e71EMKo9UQaNIwJB5oaYIK28Uo9adCLaHpITn18-UWEg.PNG%2Fimage.png&type=a340',
-    category: '경제',
+    category: '국제',
     reactionCount: 98,
   },
   {
@@ -36,7 +36,7 @@ export const curationMock: EmotionNewsItem[] = [
     publishedAt: '2026-01-21 22:10',
     imageUrl:
       'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTZfMTUz%2FMDAxNzI5MDUzMTY2MzUw.LogQtODfY6TgUCBh_w_XvYl9Xi_EXAs11ElsRWK3Fm0g.e71EMKo9UQaNIwJB5oaYIK28Uo9adCLaHpITn18-UWEg.PNG%2Fimage.png&type=a340',
-    category: 'IT',
+    category: 'IT/과학',
     reactionCount: 210,
   },
   {

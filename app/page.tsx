@@ -47,7 +47,7 @@ export default function Home() {
         </div>
         <Divider />
         <div className="h-108 py-4">
-          <h3 className="typo-h3 mx-auto mt-4 mb-6 max-w-97.5 px-4">분야별 인기 추천</h3>
+          <h3 className="typo-h3 mx-auto mb-6 max-w-97.5 px-4">분야별 인기 추천</h3>
           <RecommendViewer items={curationMock} />
         </div>
         <Divider />
@@ -66,8 +66,6 @@ export default function Home() {
           ))}
           <div ref={loaderRef} className="h-10" />
         </section>
-
-        <Divider />
       </div>
     </main>
   );

@@ -13,7 +13,7 @@ export default function RecommendCard({ title, category, coverImage }: Recommend
         className="h-[240px] bg-amber-500 bg-cover bg-center"
         style={{ backgroundImage: `url(${coverImage})` }}
       />
-      <div className="bg-navy-500 text-text-1-w typo-body-5-m absolute top-4 left-4 h-6 w-9.25 rounded-sm p-[2px_8px]">
+      <div className="bg-navy-500 text-text-1-w typo-body-5-m absolute top-4 left-4 h-6 rounded-sm p-[2px_8px]">
         {category}
       </div>
       <div className="flex h-20 w-52 items-center justify-center">
