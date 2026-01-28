@@ -17,7 +17,7 @@ export default function MainViewer({ items }: MainViewerProps) {
       <Swiper
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        className="h-[350px] w-[358px]"
+        className="h-[358px] w-[358px]"
       >
         {items.map((item, idx) => (
           <SwiperSlide key={idx} className="flex justify-center">

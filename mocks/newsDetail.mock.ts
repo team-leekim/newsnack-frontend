@@ -75,5 +75,11 @@ export const newsDetailMock = {
       publishedAt: '2026-01-22 09:30',
       articleUrl: 'https://...',
     },
+    {
+      title:
+        ' 어르신의 경험을 일자리로, 서울 금천구에 문 연 타ㅓㅏㅓㅏㅓ리ㅏ어리ㅓ니ㅏ른ㅁ이ㅑ런ㅇ먀ㅣ룽너리ㅏㅜㄴ미ㅏ러;냐ㅣ러ㅣ나루.ㅏㅓㅁ뇌;',
+      publishedAt: '2026-01-22 09:30',
+      articleUrl: 'https://...',
+    },
   ],
 };

@@ -3,6 +3,7 @@ import MainViewer from '@/components/viewer/MainViewer';
 import { newsDetailMock } from '@/mocks/newsDetail.mock';
 import { Icon } from '@iconify/react';
 import EditorSection from '@/components/section/EditorSection';
+import Divider from '@/components/section/Divider';
 
 const formatDateTime = (value: string) => {
   const [date, time] = value.split(' ');
@@ -79,32 +80,43 @@ export default function NewsDetailPage({ params }: Props) {
 
         {/* Reaction Stats */}
         <section>
-          <h2 className="mb-2 text-sm font-semibold text-gray-700">감정 통계</h2>
-          <ul className="grid grid-cols-2 gap-2 text-sm">
-            {Object.entries(data.reactionStats).map(([key, value]) => (
-              <li key={key} className="flex justify-between rounded bg-gray-100 px-3 py-1">
-                <span>{key}</span>
-                <span>{value}</span>
+          <h2 className="typo-h3 my-6 text-black">이 기사에 대해 어떻게 생각하시나요?</h2>
+          <ul className="my-6 grid grid-cols-5 gap-2 text-sm">
+            {(
+              [
+                { key: 'ANGRY', label: '화나요', image: '/angry.svg' },
+                { key: 'SURPRISED', label: '놀라워요', image: '/surprised.svg' },
+                { key: 'HAPPY', label: '행복해요', image: '/happy.svg' },
+                { key: 'EMPATHY', label: '공감돼요', image: '/empathy.svg' },
+                { key: 'SAD', label: '슬퍼요', image: '/sad.svg' },
+              ] as const
+            ).map(({ key, label, image }) => (
+              <li key={key} className="flex flex-col items-center justify-center gap-1 rounded-lg">
+                <img src={image} alt={label} className="h-11 w-11 object-contain" />
+                <span className="typo-body-5-m text-text-1">{label}</span>
+                <span className="typo-body-5-m text-text-1">{data.reactionStats[key] ?? 0}</span>
               </li>
             ))}
           </ul>
         </section>
-
+        <Divider />
         {/* Origin Articles */}
         <section>
-          <h2 className="mb-2 text-sm font-semibold text-gray-700">원본 기사</h2>
+          <h2 className="typo-h3 my-6 text-black">연관 기사를 더 보고 싶어요</h2>
           <ul className="space-y-2">
             {data.originArticles.map((article, i) => (
-              <li key={i}>
+              <li key={i} className="last:[&>a]:border-b-0">
                 <a
                   href={article.articleUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline"
+                  className="border-divider-1 block border-b py-2"
                 >
-                  {article.title}
+                  <p className="typo-body-2-m text-text-1 line-clamp-2">{article.title}</p>
+                  <p className="typo-body-5-r text-text-3 mt-1">
+                    {formatDateTime(article.publishedAt)}
+                  </p>
                 </a>
-                <p className="text-xs text-gray-500">{formatDateTime(article.publishedAt)}</p>
               </li>
             ))}
           </ul>
