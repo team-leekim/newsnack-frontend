@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import type { WebtoonContent } from '@/types/webtoon';
 import { webtoonFeedMock } from '@/mocks/webtoonFeed';
 import WebtoonItem from '@/components/WebtoonItem';
 import RecommendViewer from '@/components/viewer/RecommendViewer';
@@ -10,9 +11,10 @@ import Divider from '@/components/section/Divider';
 import EmotionNewsSection from '@/components/section/EmotionNewsSection';
 import { curationMock } from '@/mocks/curation.mock';
 import Tooltip from '@/components/Tooltip';
+import Link from 'next/link';
 
 export default function Home() {
-  const [webtoons, setWebtoons] = useState(webtoonFeedMock.contents.slice(0, 5));
+  const [webtoons, setWebtoons] = useState<WebtoonContent[]>(webtoonFeedMock.contents.slice(0, 5));
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,14 +58,22 @@ export default function Home() {
         <Divider />
 
         <section className="flex flex-col gap-10 px-4 py-6">
-          {webtoons.map((item, index) => (
-            <WebtoonItem
-              key={item.title + index}
-              editor={item.editor}
-              title={item.title}
-              publishedAt={item.publishedAt}
-              images={item.content.images}
-            />
+          {webtoons.map((item) => (
+            <Link
+              key={item.id} // ⭐ 여기
+              href={`/news/${item.id}`}
+              className="block"
+            >
+              <WebtoonItem
+                editor={item.editor}
+                title={item.title}
+                publishedAt={item.publishedAt}
+                images={item.imageUrls.map((url, index) => ({
+                  order: index,
+                  imageUrl: url,
+                }))}
+              />
+            </Link>
           ))}
           <div ref={loaderRef} className="h-10" />
         </section>

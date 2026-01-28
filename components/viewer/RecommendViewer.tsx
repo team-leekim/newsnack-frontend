@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { CurationItem } from '@/types/CurationContent';
 import RecommendCard from './RecommendCard';
+import Link from 'next/link';
 
 interface RecommendViewerProps {
   items: CurationItem[];
@@ -22,7 +23,13 @@ export default function RecommendViewer({ items }: RecommendViewerProps) {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
-            <RecommendCard title={item.title} category={item.category} coverImage={item.imageUrl} />
+            <Link href={`/news/${item.id}`} className="block">
+              <RecommendCard
+                title={item.title}
+                category={item.category}
+                coverImage={item.imageUrl}
+              />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

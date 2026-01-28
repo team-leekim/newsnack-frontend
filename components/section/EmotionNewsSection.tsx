@@ -7,6 +7,7 @@ import { emotionNewsMock } from '@/mocks/emotionNews.mock';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import type { Swiper as SwiperClass } from 'swiper';
+import Link from 'next/link';
 
 type Emotion = 'HAPPY' | 'SURPRISED' | 'EMPATHY' | 'SAD' | 'ANGRY';
 
@@ -108,12 +109,14 @@ export default function EmotionNewsSection() {
 
             return (
               <SwiperSlide key={emotion}>
-                <EmotionContent
-                  imageUrl={news.article.thumbnailUrl}
-                  title={news.article.title}
-                  editorName={news.article.editorName}
-                  publishedAt={news.article.publishedAt}
-                />
+                <Link href={`/news/${news.article.id}`} className="block">
+                  <EmotionContent
+                    imageUrl={news.article.thumbnailUrl}
+                    title={news.article.title}
+                    editorName={news.article.editorName}
+                    publishedAt={news.article.publishedAt}
+                  />
+                </Link>
               </SwiperSlide>
             );
           })}
