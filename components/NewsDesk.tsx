@@ -12,7 +12,7 @@ export default function NewsDesk() {
   ];
 
   return (
-    <div className="bg-navy-500 h-101.5 w-89.5 rounded-2xl">
+    <div className="bg-navy-500 relative h-101.5 w-89.5 rounded-2xl">
       <p className="text-text-1-w mt-8 ml-6 h-[108px] w-[215px] text-left text-[26px] leading-[36px] font-extrabold">
         오늘의 핵심 뉴스
         <br />
@@ -22,7 +22,7 @@ export default function NewsDesk() {
       </p>
 
       <AudioButton />
-
+      <img src="/otter.png" className="absolute top-0 right-0 translate-x-8.5"></img>
       <HeadlineSlider titles={headlines} />
     </div>
   );

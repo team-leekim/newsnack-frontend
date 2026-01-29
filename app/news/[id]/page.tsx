@@ -38,7 +38,7 @@ export default function NewsDetailPage({ params }: Props) {
         </section>
 
         {/* Title, Editor */}
-        <header className="border-navy-500 mb-4 border-b">
+        <header className="border-navy-100 mb-4 border-b">
           <h1 className="typo-h2 py-4">{data.title}</h1>
           <div className="flex items-center gap-[6px] pb-4 text-sm text-gray-500">
             <img
@@ -54,7 +54,7 @@ export default function NewsDetailPage({ params }: Props) {
         </header>
 
         {/* Summary */}
-        <section className="bg-navy-0 flex flex-col gap-2 rounded-sm px-4 py-6">
+        <section className="flex flex-col gap-2 rounded-sm bg-[#F0F2F4] px-4 py-6">
           <h2 className="text-text-1 typo-btn-1-b rounded-sm">
             💡 바쁜 당신을 위한 핵심체크! AI 3줄 핵심 브리핑
           </h2>
@@ -99,6 +99,7 @@ export default function NewsDetailPage({ params }: Props) {
             ))}
           </ul>
         </section>
+        <Divider />
         {/* Origin Articles */}
         <section>
           <h2 className="typo-h3 my-6 text-black">연관 기사를 더 보고 싶어요</h2>

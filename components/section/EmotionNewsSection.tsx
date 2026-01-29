@@ -111,6 +111,7 @@ export default function EmotionNewsSection() {
               <SwiperSlide key={emotion}>
                 <Link href={`/news/${news.article.id}`} className="block">
                   <EmotionContent
+                    emotion={emotion}
                     imageUrl={news.article.thumbnailUrl}
                     title={news.article.title}
                     editorName={news.article.editorName}
