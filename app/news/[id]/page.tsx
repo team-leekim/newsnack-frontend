@@ -85,11 +85,11 @@ export default async function NewsDetailPage({ params }: Props) {
           <ul className="my-6 grid grid-cols-5 gap-2 text-sm">
             {(
               [
-                { key: 'ANGRY', label: '화나요', image: '/angry.svg' },
-                { key: 'SURPRISED', label: '놀라워요', image: '/surprised.svg' },
-                { key: 'HAPPY', label: '행복해요', image: '/happy.svg' },
-                { key: 'EMPATHY', label: '공감돼요', image: '/empathy.svg' },
-                { key: 'SAD', label: '슬퍼요', image: '/sad.svg' },
+                { key: 'ANGRY', label: '화나요', image: '/angry.png' },
+                { key: 'SURPRISED', label: '놀라워요', image: '/surprised.png' },
+                { key: 'HAPPY', label: '행복해요', image: '/happy.png' },
+                { key: 'EMPATHY', label: '공감돼요', image: '/empathy.png' },
+                { key: 'SAD', label: '슬퍼요', image: '/sad.png' },
               ] as const
             ).map(({ key, label, image }) => (
               <li key={key} className="flex flex-col items-center justify-center gap-1 rounded-lg">
