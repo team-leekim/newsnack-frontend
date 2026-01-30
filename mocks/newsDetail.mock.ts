@@ -2,7 +2,7 @@
 export const newsDetailMock = {
   id: 101,
   title: '캄보디아 한국인 스캠 조직원 73명 강제송환…"역대 최대 규모"',
-  publishedAt: '2026-01-22 09:30',
+  publishedAt: '2026-01-22 08:30',
   contentType: 'WEBTOON',
   summary: ['첫 번째 요약 문장입니다.', '두 번째 요약 문장입니다.', '세 번째 요약 문장입니다.'],
   body: `두쫀쿠가 K-푸드야?

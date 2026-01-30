@@ -5,12 +5,7 @@ import { Icon } from '@iconify/react';
 import EditorSection from '@/components/section/EditorSection';
 import Divider from '@/components/section/Divider';
 import Link from 'next/link';
-
-const formatDateTime = (value: string) => {
-  const [date, time] = value.split(' ');
-  const formattedDate = date.replace(/-/g, '.');
-  return `${formattedDate}. ${time}`;
-};
+import { convertUTCtoKST, formatKSTDateTime } from '@/utils/time';
 
 type Props = {
   params: Promise<{
@@ -53,7 +48,10 @@ export default async function NewsDetailPage({ params }: Props) {
                 {data.editor.name}
               </span>
             </Link>
-            <span className="typo-body-5-r text-text-3"> {formatDateTime(data.publishedAt)}</span>
+            <span className="typo-body-5-r text-text-3">
+              {' '}
+              {formatKSTDateTime(data.publishedAt)}
+            </span>
           </div>
         </header>
 
@@ -120,7 +118,7 @@ export default async function NewsDetailPage({ params }: Props) {
                 >
                   <p className="typo-body-2-m text-text-1 line-clamp-2">{article.title}</p>
                   <p className="typo-body-5-r text-text-3 mt-1">
-                    {formatDateTime(article.publishedAt)}
+                    {formatKSTDateTime(article.publishedAt)}
                   </p>
                 </a>
               </li>
