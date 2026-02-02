@@ -57,7 +57,7 @@ export default function Home() {
         <EmotionNewsSection />
         <Divider />
 
-        <section className="flex flex-col gap-10 px-4 py-6">
+        <section className="flex flex-col gap-10 py-6">
           {webtoons.map((item) => (
             <WebtoonItem
               key={item.id}

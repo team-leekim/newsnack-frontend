@@ -52,7 +52,7 @@ export default function WebtoonItem({
           e.stopPropagation(); // 뉴스 페이지 이동 방지
           router.push(`/editor/${editor.id}`);
         }}
-        className="flex cursor-pointer items-center gap-3"
+        className="flex cursor-pointer items-center gap-3 px-4"
       >
         <img
           src={editor.imageUrl}
@@ -74,7 +74,7 @@ export default function WebtoonItem({
                 key={img.order}
                 src={img.imageUrl}
                 alt={`webtoon-${img.order}`}
-                className="h-[358px] w-[358px] rounded-2xl object-cover"
+                className="h-[390px] w-[390px] object-cover"
               />
             ))}
         />
