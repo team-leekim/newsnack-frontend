@@ -173,6 +173,37 @@ export default function TodayNewsPage() {
             )}
           </div>
 
+          {/* navigation buttons */}
+          {activeIndex > 0 && (
+            <button
+              onClick={() => {
+                const audio = audioRef.current;
+                if (!audio) return;
+                const prevIndex = activeIndex - 1;
+                audio.currentTime = todayNewsMock.content.script[prevIndex].startTime;
+                setActiveIndex(prevIndex);
+              }}
+              className="absolute top-[200px] left-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
+            >
+              <img src={'/left_arrow.svg'} className="-translate-x-0.5 opacity-100" />
+            </button>
+          )}
+
+          {activeIndex < todayNewsMock.articles.length - 1 && (
+            <button
+              onClick={() => {
+                const audio = audioRef.current;
+                if (!audio) return;
+                const nextIndex = activeIndex + 1;
+                audio.currentTime = todayNewsMock.content.script[nextIndex].startTime;
+                setActiveIndex(nextIndex);
+              }}
+              className="absolute top-[200px] right-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
+            >
+              <img src={'/right_arrow.svg'} />
+            </button>
+          )}
+
           {/* gradient overlay */}
           {!isPlaying && (
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.3)_100%)]" />
