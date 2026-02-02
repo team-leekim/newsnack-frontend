@@ -23,7 +23,7 @@ export default function NewsDesk() {
       </p>
 
       <AudioButton />
-      <img src="/otter.png" className="absolute top-0 right-0 translate-x-8.5" />
+      <img src="/otter.png" className="absolute top-0 right-0" />
       <HeadlineSlider titles={headlines} />
     </Link>
   );
