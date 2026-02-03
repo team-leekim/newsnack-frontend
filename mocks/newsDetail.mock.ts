@@ -1,6 +1,9 @@
 // mocks/newsDetail.mock.ts
-export const newsDetailMock = {
+import { ContentDetailResponse } from '@/types/contentDetail';
+
+export const newsDetailMock: ContentDetailResponse = {
   id: 101,
+  category: 'IT과학',
   title: '캄보디아 한국인 스캠 조직원 73명 강제송환…"역대 최대 규모"',
   publishedAt: '2026-01-22 08:30',
   contentType: 'WEBTOON',
@@ -22,41 +25,14 @@ export const newsDetailMock = {
     keywords: ['#친절한', '#IT전문', '#쉽게설명'],
     description: '복잡한 IT 기술과 기후 변화의 핵심 로직을 분석하는 데 특화된 에디터입니다.',
   },
-  content: {
-    images: [
-      {
-        order: 1,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA0MDRfMTg3%2FMDAxNzEyMjE5MzM4NTE0.1wQ_s3DiszczjWw7ivmMi2s-4npgnpAgjpQCwQf4_4Eg.nAKOHKojSmjHuJSHOFr8c7xkDxmSL8nzUSa9mN5qAukg.PNG%2Fimage.png&type=a340',
-      },
-      {
-        order: 2,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjFfMjY5%2FMDAxNzU4NDI0NzA3MzA0.tzdTWRxxru7vsY-7GOAH-HrqqKuhT2axUrS7BiP2Lbog.BCcljARu8-jaBmADIlAnLg2giOfymqJKYwgvmSbI6F8g.PNG%2Fimage.png&type=a340',
-      },
-      {
-        order: 3,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTJfMjI0%2FMDAxNzI4NzEzNDkzMTgz.0hT6ISzuCMl4iPN6Wtj6Jl3m-d7NLnMnbT_Xl7OmjzYg.SFlouxKP2FBrvEMoFahvXeQvUaOK-wx2O3VTgq_0xFYg.PNG%2Fimage.png&type=sc960_832',
-      },
-      {
-        order: 4,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjdfMTMz%2FMDAxNjY5NTU5OTg2MTE4.8U6-gDsjL1pbB63ngBNWEo_UC9E3lxvrSC4cWgcd340g.kUQQsfP_gMwf9m_J_ohF9ObVftQfVRIaJ-bauM1A-L4g.JPEG.rlachdnjs28%2FScreenshot%25A3%25DF20221109%25A3%25DF172506%25A3%25DFSamsung_Internet.jpg&type=a340',
-      },
-      {
-        order: 5,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjFfMjY5%2FMDAxNzU4NDI0NzA3MzA0.tzdTWRxxru7vsY-7GOAH-HrqqKuhT2axUrS7BiP2Lbog.BCcljARu8-jaBmADIlAnLg2giOfymqJKYwgvmSbI6F8g.PNG%2Fimage.png&type=a340',
-      },
-      {
-        order: 6,
-        imageUrl:
-          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTJfMjI0%2FMDAxNzI4NzEzNDkzMTgz.0hT6ISzuCMl4iPN6Wtj6Jl3m-d7NLnMnbT_Xl7OmjzYg.SFlouxKP2FBrvEMoFahvXeQvUaOK-wx2O3VTgq_0xFYg.PNG%2Fimage.png&type=sc960_832',
-      },
-    ],
-  },
-  userReaction: 'HAPPY',
+  imageUrls: [
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA0MDRfMTg3%2FMDAxNzEyMjE5MzM4NTE0.1wQ_s3DiszczjWw7ivmMi2s-4npgnpAgjpQCwQf4_4Eg.nAKOHKojSmjHuJSHOFr8c7xkDxmSL8nzUSa9mN5qAukg.PNG%2Fimage.png&type=a340',
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjFfMjY5%2FMDAxNzU4NDI0NzA3MzA0.tzdTWRxxru7vsY-7GOAH-HrqqKuhT2axUrS7BiP2Lbog.BCcljARu8-jaBmADIlAnLg2giOfymqJKYwgvmSbI6F8g.PNG%2Fimage.png&type=a340',
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTJfMjI0%2FMDAxNzI4NzEzNDkzMTgz.0hT6ISzuCMl4iPN6Wtj6Jl3m-d7NLnMnbT_Xl7OmjzYg.SFlouxKP2FBrvEMoFahvXeQvUaOK-wx2O3VTgq_0xFYg.PNG%2Fimage.png&type=sc960_832',
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjdfMTMz%2FMDAxNjY5NTU5OTg2MTE4.8U6-gDsjL1pbB63ngBNWEo_UC9E3lxvrSC4cWgcd340g.kUQQsfP_gMwf9m_J_ohF9ObVftQfVRIaJ-bauM1A-L4g.JPEG.rlachdnjs28%2FScreenshot%25A3%25DF20221109%25A3%25DF172506%25A3%25DFSamsung_Internet.jpg&type=a340',
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjFfMjY5%2FMDAxNzU4NDI0NzA3MzA0.tzdTWRxxru7vsY-7GOAH-HrqqKuhT2axUrS7BiP2Lbog.BCcljARu8-jaBmADIlAnLg2giOfymqJKYwgvmSbI6F8g.PNG%2Fimage.png&type=a340',
+    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMTJfMjI0%2FMDAxNzI4NzEzNDkzMTgz.0hT6ISzuCMl4iPN6Wtj6Jl3m-d7NLnMnbT_Xl7OmjzYg.SFlouxKP2FBrvEMoFahvXeQvUaOK-wx2O3VTgq_0xFYg.PNG%2Fimage.png&type=sc960_832',
+  ],
   reactionStats: {
     HAPPY: 10,
     SURPRISED: 5,
@@ -64,22 +40,22 @@ export const newsDetailMock = {
     ANGRY: 1,
     EMPATHY: 20,
   },
-  originArticles: [
+  originalArticles: [
     {
       title: '엔비디아 역대급 실적 발표',
       publishedAt: '2026-01-22 09:30',
-      articleUrl: 'https://...',
+      url: 'https://...',
     },
     {
       title: '한국은행 기준금리 동결',
       publishedAt: '2026-01-22 09:30',
-      articleUrl: 'https://...',
+      url: 'https://...',
     },
     {
       title:
         ' 어르신의 경험을 일자리로, 서울 금천구에 문 연 타ㅓㅏㅓㅏㅓ리ㅏ어리ㅓ니ㅏ른ㅁ이ㅑ런ㅇ먀ㅣ룽너리ㅏㅜㄴ미ㅏ러;냐ㅣ러ㅣ나루.ㅏㅓㅁ뇌;',
       publishedAt: '2026-01-22 09:30',
-      articleUrl: 'https://...',
+      url: 'https://...',
     },
   ],
 };
