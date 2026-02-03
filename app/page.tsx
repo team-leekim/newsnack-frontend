@@ -2,30 +2,92 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { WebtoonContent } from '@/types/webtoon';
-import { webtoonFeedMock } from '@/mocks/webtoonFeed';
-import WebtoonItem from '@/components/WebtoonItem';
 import RecommendViewer from '@/components/viewer/RecommendViewer';
 import MainHeader from '@/components/header/MainHeader';
 import NewsDesk from '@/components/NewsDesk';
 import Divider from '@/components/section/Divider';
 import EmotionNewsSection from '@/components/section/EmotionNewsSection';
-import { curationMock } from '@/mocks/curation.mock';
 import Tooltip from '@/components/Tooltip';
+import WebtoonItem from '@/components/WebtoonItem';
+import { getCategoryBest, getEmotionBest } from '@/api/curation';
+import { CategoryBestItem } from '../types/categoryBest';
+import { EmotionBestItem } from '../types/emotionBest';
+import { getContents } from '@/api/content';
+import { ContentItem } from '@/types/content';
+import { getTodayNewsSnack } from '@/api/newsnack';
 
 export default function Home() {
-  const [webtoons, setWebtoons] = useState<WebtoonContent[]>(webtoonFeedMock.contents.slice(0, 5));
-  const loaderRef = useRef<HTMLDivElement | null>(null);
+  // 홈 상단 추천(카테고리 / 감정) 데이터
+  const [categoryBest, setCategoryBest] = useState<CategoryBestItem[]>([]);
+  const [emotionBest, setEmotionBest] = useState<EmotionBestItem[]>([]);
+  const [todayArticles, setTodayArticles] = useState<{ id: number; title: string }[]>([]);
   const router = useRouter();
+  const loaderRef = useRef<HTMLDivElement | null>(null);
 
+  // 무한 스크롤용 뉴스 콘텐츠 상태
+  const [contents, setContents] = useState<ContentItem[]>([]);
+  const [cursor, setCursor] = useState<number | null>(null);
+  const [hasNext, setHasNext] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 카테고리별 / 감정별 추천 데이터 조회
+  useEffect(() => {
+    getCategoryBest()
+      .then((res) => {
+        setCategoryBest(res.data);
+      })
+      .catch(console.error);
+
+    getEmotionBest()
+      .then((res) => {
+        setEmotionBest(res.data);
+      })
+      .catch(console.error);
+
+    getTodayNewsSnack()
+      .then((res) => {
+        setTodayArticles(
+          res.data.articles.map((a) => ({
+            id: a.id,
+            title: a.title,
+          }))
+        );
+      })
+      .catch(console.error);
+  }, []);
+
+  // 최초 진입 시 첫 페이지 로드
+  useEffect(() => {
+    loadMore();
+  }, []);
+
+  // 커서 기반 무한 스크롤 데이터 로딩
+  const loadMore = async () => {
+    if (!hasNext || isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const res = await getContents({
+        cursor: cursor ?? undefined,
+        size: 10,
+      });
+
+      setContents((prev) => [...prev, ...res.data.contents]);
+      setCursor(res.data.nextCursor);
+      setHasNext(res.data.hasNext);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // 화면 하단 감지 시 다음 페이지 요청
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setWebtoons((prev) => {
-            const nextLength = prev.length + 5;
-            return webtoonFeedMock.contents.slice(0, nextLength);
-          });
+          loadMore();
         }
       },
       { threshold: 1 }
@@ -33,7 +95,19 @@ export default function Home() {
 
     if (loaderRef.current) observer.observe(loaderRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [loaderRef.current, hasNext, isLoading]);
+
+  // RecommendViewer에서 쓰기 위한 카테고리 큐레이션 데이터 가공
+  const categoryCurationItems = categoryBest.map((item) => ({
+    id: item.article.id,
+    title: item.article.title,
+    thumbnailUrl: item.article.thumbnailUrl,
+    imageUrl: item.article.thumbnailUrl,
+    editorName: item.categoryName,
+    publishedAt: '',
+    category: item.categoryName,
+    reactionCount: 0,
+  }));
 
   return (
     <main className="flex flex-col items-center justify-center">
@@ -45,20 +119,20 @@ export default function Home() {
               <h3 className="typo-h3">오늘의 뉴스낵</h3>
               <Tooltip />
             </div>
-            <NewsDesk />
+            <NewsDesk articles={todayArticles} />
           </div>
         </div>
         <Divider />
         <div className="py-6">
           <h3 className="typo-h3 mx-auto max-w-97.5 px-4 pb-6">분야별 인기 추천</h3>
-          <RecommendViewer items={curationMock} />
+          <RecommendViewer items={categoryCurationItems} />
         </div>
         <Divider />
-        <EmotionNewsSection />
+        <EmotionNewsSection items={emotionBest} />
         <Divider />
-
         <section className="flex flex-col gap-10 py-6">
-          {webtoons.map((item) => (
+          {/* 전체 최신 뉴스 무한 피드 렌더링 */}
+          {contents.map((item) => (
             <WebtoonItem
               key={item.id}
               id={item.id}

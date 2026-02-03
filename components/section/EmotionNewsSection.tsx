@@ -3,13 +3,17 @@
 import { useState, useRef } from 'react';
 import EmotionButton from '../buttons/EmotionButton';
 import EmotionContent from '../EmotionContent';
-import { emotionNewsMock } from '@/mocks/emotionNews.mock';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import type { Swiper as SwiperClass } from 'swiper';
 import Link from 'next/link';
+import { EmotionBestItem, EmotionType } from '@/types/emotionBest';
 
-type Emotion = 'HAPPY' | 'SURPRISED' | 'EMPATHY' | 'SAD' | 'ANGRY';
+type Emotion = EmotionType;
+
+type Props = {
+  items: EmotionBestItem[];
+};
 
 const emotionOrder: Emotion[] = ['HAPPY', 'SURPRISED', 'EMPATHY', 'SAD', 'ANGRY'];
 
@@ -29,7 +33,7 @@ const emotionTitleMap: Record<Emotion, string> = {
   ANGRY: '오늘의 화나는 뉴스',
 };
 
-export default function EmotionNewsSection() {
+export default function EmotionNewsSection({ items }: Props) {
   const [activeEmotion, setActiveEmotion] = useState<Emotion>('HAPPY');
   const swiperRef = useRef<SwiperClass | null>(null);
   const buttonContainerRef = useRef<HTMLDivElement | null>(null);
@@ -104,7 +108,7 @@ export default function EmotionNewsSection() {
           }}
         >
           {emotionOrder.map((emotion) => {
-            const news = emotionNewsMock.find((item) => item.emotionType === emotion);
+            const news = items.find((item) => item.emotionType === emotion);
             if (!news) return null;
 
             return (
