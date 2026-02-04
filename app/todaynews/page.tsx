@@ -179,7 +179,7 @@ export default function TodayNewsPage() {
           >
             {isPlaying && (
               <img
-                src={data?.content.imageUrls[activeIndex]}
+                src={data?.content.imageUrls?.[activeIndex]}
                 alt=""
                 className="h-[200px] w-[200px] object-cover"
               />
@@ -193,7 +193,7 @@ export default function TodayNewsPage() {
                 const audio = audioRef.current;
                 if (!audio) return;
                 const prevIndex = activeIndex - 1;
-                audio.currentTime = data?.content.script[prevIndex]?.startTime ?? 0;
+                audio.currentTime = data?.content.script?.[prevIndex]?.startTime ?? 0;
                 setActiveIndex(prevIndex);
               }}
               className="absolute top-[200px] left-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
@@ -208,7 +208,7 @@ export default function TodayNewsPage() {
                 const audio = audioRef.current;
                 if (!audio) return;
                 const nextIndex = activeIndex + 1;
-                audio.currentTime = data?.content.script[nextIndex]?.startTime ?? 0;
+                audio.currentTime = data?.content.script?.[nextIndex]?.startTime ?? 0;
                 setActiveIndex(nextIndex);
               }}
               className="absolute top-[200px] right-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
@@ -241,7 +241,7 @@ export default function TodayNewsPage() {
                   key={`title-a-${activeIndex}`}
                   className="animate-title-fade inline-block flex-shrink-0 pr-16"
                 >
-                  {data?.articles[activeIndex]?.title}
+                  {data?.articles?.[activeIndex]?.title}
                 </span>
               </div>
             </div>
