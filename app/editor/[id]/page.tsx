@@ -4,13 +4,7 @@ import EditorNewsCard from '@/components/EditorNewsCard';
 import { getEditorDetail } from '@/api/editor';
 import { EditorDetailResponse } from '@/types/editor';
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-export default async function EditorPage({ params }: Props) {
+export default async function EditorPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
   let editor: EditorDetailResponse | null = null;
