@@ -74,7 +74,14 @@ export default function Home() {
         size: 10,
       });
 
-      setContents((prev) => [...prev, ...res.data.contents]);
+      setContents((prev) => {
+        const merged = [...prev, ...res.data.contents];
+        const uniqueMap = new Map<number, ContentItem>();
+        merged.forEach((item) => {
+          uniqueMap.set(item.id, item);
+        });
+        return Array.from(uniqueMap.values());
+      });
       setCursor(res.data.nextCursor);
       setHasNext(res.data.hasNext);
     } catch (e) {
@@ -99,7 +106,7 @@ export default function Home() {
 
     if (currentLoader) observer.observe(currentLoader);
     return () => observer.disconnect();
-  }, [hasNext]);
+  }, [hasNext, cursor]);
 
   // RecommendViewer에서 쓰기 위한 카테고리 큐레이션 데이터 가공
   const categoryCurationItems = categoryBest.map((item) => ({
