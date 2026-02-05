@@ -1,6 +1,7 @@
 // components/card/EditorNewsCard.tsx
 import Link from 'next/link';
 import { formatPublishedAt } from '@/utils/time';
+import Image from 'next/image';
 
 interface EditorNewsCardProps {
   id: number;
@@ -19,7 +20,11 @@ export default function EditorNewsCard({
 }: EditorNewsCardProps) {
   return (
     <Link href={`/news/${id}`} className="flex flex-col gap-2">
-      <img src={thumbnailUrl} alt={title} className="h-[171px] w-[171px] rounded-lg object-cover" />
+      <Image
+        src={thumbnailUrl}
+        alt={title}
+        className="h-[171px] w-[171px] rounded-lg object-cover"
+      />
       <div className="flex flex-col gap-1">
         <h3 className="typo-body-2-m line-clamp-2 text-black">{title}</h3>
         <div className="flex items-center gap-1">

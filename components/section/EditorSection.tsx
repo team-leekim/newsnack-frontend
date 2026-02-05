@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 interface Editor {
   imageUrl: string;
@@ -15,10 +16,12 @@ export default function EditorSection({ editor }: EditorProps) {
   return (
     <section className="bg-navy-0 space-y-2 rounded-lg p-4">
       <div className="flex gap-4">
-        <img
+        <Image
           src={editor.imageUrl}
           alt={editor.name}
-          className="h-[56px] w-[56px] shrink-0 rounded-full object-cover"
+          height={56}
+          width={56}
+          className="shrink-0 rounded-full object-cover"
         />
         <div className="flex flex-col justify-center gap-1">
           <span className="text-text-1 typo-h3 flex items-center">{editor.name}</span>

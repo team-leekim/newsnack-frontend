@@ -1,6 +1,7 @@
 'use client';
 import { InterestItem } from '@/types/CurationContent';
 import { formatPublishedAt } from '@/utils/time';
+import Image from 'next/image';
 
 interface InterestContentProps {
   item: InterestItem;
@@ -18,7 +19,7 @@ export default function InterestContent({ item }: InterestContentProps) {
         </div>
       </div>
       <div className="absolute right-0 left-auto">
-        <img
+        <Image
           src={item.imageUrl}
           alt={item.title}
           className="h-19.5 w-19.5 rounded-lg object-cover"

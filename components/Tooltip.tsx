@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function Tooltip() {
   const [open, setOpen] = useState(false);
@@ -21,17 +22,19 @@ export default function Tooltip() {
 
   return (
     <div ref={wrapperRef} className="relative inline-block">
-      <img
+      <Image
         src="/info.svg"
         alt="info"
-        className="h-6 w-6 cursor-pointer"
+        width={24}
+        height={24}
+        className="cursor-pointer"
         onClick={() => setOpen((prev) => !prev)}
       />
 
       {open && (
         <div className="absolute top-4 z-20 -translate-x-12">
           <div className="relative h-[138px] w-[180px]">
-            <img src="/tooltip.png" alt="tooltip" className="h-full w-full" />
+            <Image src="/tooltip.png" alt="tooltip" height={137} width={180} />
 
             {/* text container */}
             <div className="absolute top-[75px] left-1/2 h-[66px] w-[124px] -translate-x-1/2 -translate-y-1/2">

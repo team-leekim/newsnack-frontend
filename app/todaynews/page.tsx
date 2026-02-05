@@ -3,6 +3,7 @@ import NewsnackSlider from '@/components/slider/NewsnackSilder';
 import { useEffect, useRef, useState } from 'react';
 import { getTodayNewsSnack } from '@/api/newsnack';
 import { TodayNewsSnackResponse } from '@/types/newsnack';
+import Image from 'next/image';
 
 export default function TodayNewsPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -219,7 +220,13 @@ export default function TodayNewsPage() {
       <div className="mx-auto w-[390px]">
         {' '}
         <div className="relative aspect-[390/495] w-full overflow-hidden">
-          <img src="/logo-white.png" className="absolute top-[15px] left-[115px] z-10" />
+          <Image
+            src="/logo-white.png"
+            alt="logo"
+            height={47}
+            width={154}
+            className="absolute top-[15px] left-[115px] z-10"
+          />
           <video
             ref={videoRef}
             src="/news.mp4"
@@ -239,10 +246,12 @@ export default function TodayNewsPage() {
             }}
           >
             {isPlaying && (
-              <img
+              <Image
                 src={data?.articles?.[activeIndex]?.imageUrl}
-                alt=""
-                className="h-[200px] w-[200px] object-cover"
+                alt="Newsnack"
+                width={200}
+                height={200}
+                className="object-cover"
               />
             )}
           </div>
@@ -259,7 +268,13 @@ export default function TodayNewsPage() {
               }}
               className="absolute top-[200px] left-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
             >
-              <img src={'/left_arrow.svg'} className="-translate-x-0.5 opacity-100" />
+              <Image
+                alt="prev button"
+                src={'/left_arrow.svg'}
+                width={24}
+                height={24}
+                className="-translate-x-0.5 opacity-100"
+              />
             </button>
           )}
 
@@ -274,7 +289,7 @@ export default function TodayNewsPage() {
               }}
               className="absolute top-[200px] right-4 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-black/40"
             >
-              <img src={'/right_arrow.svg'} />
+              <Image alt="next button" width={24} height={24} src={'/right_arrow.svg'} />
             </button>
           )}
 
@@ -289,7 +304,7 @@ export default function TodayNewsPage() {
               onClick={handlePlay}
               className="pointer-events-auto absolute top-1/2 left-1/2 z-30 flex h-[80px] w-[80px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40"
             >
-              <img src="/start.svg" className="ml-1" />
+              <Image alt="start button" width={30} height={30} src="/start.svg" className="ml-1" />
             </button>
           )}
         </div>

@@ -4,6 +4,7 @@
 import { formatPublishedAt } from '@/utils/time';
 import MainViewer from './viewer/MainViewer';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface WebtoonImage {
   order: number;
@@ -54,10 +55,12 @@ export default function WebtoonItem({
         }}
         className="flex cursor-pointer items-center gap-3 px-4"
       >
-        <img
+        <Image
           src={editor.imageUrl}
           alt={editor.name}
-          className="h-[48px] w-[48px] rounded-full object-cover"
+          width={48}
+          height={48}
+          className="rounded-full object-cover"
         />
         <div className="flex flex-col">
           <span className="typo-h4 text-sm text-gray-700">{editor.name}</span>
@@ -70,11 +73,13 @@ export default function WebtoonItem({
           items={images
             .sort((a, b) => a.order - b.order)
             .map((img) => (
-              <img
+              <Image
                 key={img.order}
                 src={img.imageUrl}
+                width={390}
+                height={390}
                 alt={`webtoon-${img.order}`}
-                className="h-[390px] w-[390px] object-cover"
+                className="object-cover"
               />
             ))}
         />

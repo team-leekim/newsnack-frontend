@@ -8,8 +8,9 @@ import { Icon } from '@iconify/react';
 import EditorSection from '@/components/section/EditorSection';
 import Divider from '@/components/section/Divider';
 import Link from 'next/link';
-import { convertUTCtoKST, formatKSTDateTime } from '@/utils/time';
+import { formatKSTDateTime } from '@/utils/time';
 import { ContentDetailResponse } from '@/types/contentDetail';
+import Image from 'next/image';
 
 export default function NewsDetailClient({ data }: { data: ContentDetailResponse }) {
   const normalizeReactionStats = (stats: Record<string, number>) => ({
@@ -39,12 +40,15 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
         <section className="w-full">
           <MainViewer
             items={data.imageUrls.map((imgUrl: string, index: number) => (
-              <img
-                key={index}
-                src={imgUrl}
-                alt={`content-image-${index}`}
-                className="h-[390px] w-[390px] object-cover"
-              />
+              <div key={index} className="h-[390px] w-[390px]">
+                <Image
+                  key={index}
+                  src={imgUrl}
+                  alt={`content-image-${index}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ))}
           />
         </section>
@@ -54,10 +58,12 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
           <h1 className="typo-h2 py-4">{data.title}</h1>
           <div className="flex items-center gap-[6px] pb-4 text-sm text-gray-500">
             <Link href={`/editor/${data.editor.id}`} className="block flex gap-[6px]">
-              <img
+              <Image
                 src={data.editor.imageUrl}
                 alt={data.editor.name}
-                className="h-6 w-6 rounded-full object-cover"
+                width={24}
+                height={24}
+                className="rounded-full object-cover"
               />
               <span className="text-text-1 typo-subtitle-1 flex items-center">
                 {data.editor.name}
@@ -116,7 +122,13 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
                   onClick={() => handleReactionClick(key)}
                   className="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg"
                 >
-                  <img src={image} alt={label} className="h-11 w-11 object-contain" />
+                  <Image
+                    src={image}
+                    alt={label}
+                    width={44}
+                    height={44}
+                    className="object-contain"
+                  />
                   <span className="typo-body-5-m text-text-1">{label}</span>
                   <span className="typo-body-5-m text-text-1">{reactionStats[key] ?? 0}</span>
                 </li>

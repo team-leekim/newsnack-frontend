@@ -1,5 +1,6 @@
 'use client';
 import { formatPublishedAt } from '@/utils/time';
+import Image from 'next/image';
 
 type EmotionType = 'HAPPY' | 'SURPRISED' | 'EMPATHY' | 'SAD' | 'ANGRY';
 
@@ -51,9 +52,12 @@ export default function EmotionContent({
         />
       </div>
       <div className="flex w-[180px] flex-col gap-2">
-        <img
+        <Image
+          alt="thumbnail image"
           src={imageUrl}
-          className="h-[180px] w-[180px] rounded-lg border-2 border-white/60 bg-cover"
+          width={180}
+          height={180}
+          className="rounded-lg border-2 border-white/60 bg-cover"
         />
         <h4 className="typo-body-2-m line-clamp-2 w-[180px] break-words whitespace-normal">
           {title}

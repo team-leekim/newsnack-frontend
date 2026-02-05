@@ -2,6 +2,7 @@
 import AudioButton from './buttons/Audiobutton';
 import HeadlineSlider from './slider/HeadlineSlider';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Props = {
   articles: {
@@ -22,7 +23,13 @@ export default function NewsDesk({ articles }: Props) {
       </p>
 
       <AudioButton />
-      <img src="/otter.png" className="absolute top-0 right-0" />
+      <Image
+        alt="otter"
+        src="/otter.png"
+        width={235}
+        height={261}
+        className="absolute top-0 right-0"
+      />
       <HeadlineSlider titles={articles.map((a) => a.title)} />
     </Link>
   );
