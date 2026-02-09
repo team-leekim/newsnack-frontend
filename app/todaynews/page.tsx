@@ -18,6 +18,7 @@ export default function TodayNewsPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [startMarquee, setStartMarquee] = useState(false);
   const [data, setData] = useState<TodayNewsSnackResponse | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     getTodayNewsSnack()
@@ -111,14 +112,18 @@ export default function TodayNewsPage() {
       if (backwardIntervalRef.current) clearInterval(backwardIntervalRef.current);
 
       video.pause();
+      video.currentTime = 0;
       directionRef.current = 'forward';
+
       setIsPlaying(false);
       setStartMarquee(false);
+      setActiveIndex(0);
+      setIsPaused(false);
     };
 
     audio.addEventListener('ended', onAudioEnded);
     return () => audio.removeEventListener('ended', onAudioEnded);
-  }, []);
+  }, [data]);
 
   const handlePlay = async () => {
     const video = videoRef.current;
@@ -142,6 +147,31 @@ export default function TodayNewsPage() {
     } catch (e) {
       console.error(e);
       isPlayingVideoRef.current = false;
+    }
+  };
+
+  const handleTogglePause = async () => {
+    const video = videoRef.current;
+    const audio = audioRef.current;
+    if (!video || !audio) return;
+
+    if (!isPaused) {
+      // pause
+      video.pause();
+      audio.pause();
+      isPlayingVideoRef.current = false;
+
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+      if (backwardIntervalRef.current) clearInterval(backwardIntervalRef.current);
+
+      setIsPaused(true);
+    } else {
+      // resume
+      isPlayingVideoRef.current = true;
+      await audio.play();
+      await video.play();
+      startVideoLoop();
+      setIsPaused(false);
     }
   };
 
@@ -195,7 +225,12 @@ export default function TodayNewsPage() {
 
       <div className="mx-auto w-[390px]">
         <MainHeader />
-        <div className="relative aspect-[390/495] w-full overflow-hidden">
+        <div
+          className="relative aspect-[390/495] w-full overflow-hidden"
+          onClick={() => {
+            if (isPlaying) handleTogglePause();
+          }}
+        >
           <video
             ref={videoRef}
             src="/news.mp4"
@@ -226,7 +261,8 @@ export default function TodayNewsPage() {
 
           {activeIndex > 0 && (
             <button
-              onClick={() => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
                 const audio = audioRef.current;
                 if (!audio) return;
                 const prevIndex = activeIndex - 1;
@@ -247,7 +283,8 @@ export default function TodayNewsPage() {
 
           {activeIndex < (data?.articles.length ?? 0) - 1 && (
             <button
-              onClick={() => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
                 const audio = audioRef.current;
                 if (!audio) return;
                 const nextIndex = activeIndex + 1;
@@ -260,6 +297,18 @@ export default function TodayNewsPage() {
             </button>
           )}
 
+          {isPaused && (
+            <>
+              <div className="pointer-events-none absolute inset-0 z-20 bg-black/40" />
+              <button
+                onClick={handleTogglePause}
+                className="pointer-events-auto absolute top-1/2 left-1/2 z-30 flex h-[80px] w-[80px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40"
+              >
+                <Image alt="pause" src="/pause.svg" width={40} height={40} />
+              </button>
+            </>
+          )}
+
           {!isPlaying && (
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.3)_100%)]" />
           )}
@@ -269,7 +318,7 @@ export default function TodayNewsPage() {
               onClick={handlePlay}
               className="pointer-events-auto absolute top-1/2 left-1/2 z-30 flex h-[80px] w-[80px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40"
             >
-              <Image alt="start button" width={30} height={30} src="/start.svg" className="ml-1" />
+              <Image alt="start button" width={20} height={20} src="/start.svg" className="ml-1" />
             </button>
           )}
         </div>
