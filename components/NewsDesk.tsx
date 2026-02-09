@@ -1,8 +1,8 @@
 'use client';
 import AudioButton from './buttons/Audiobutton';
 import HeadlineSlider from './slider/HeadlineSlider';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   articles: {
@@ -12,8 +12,13 @@ type Props = {
 };
 
 export default function NewsDesk({ articles }: Props) {
+  const router = useRouter();
+
   return (
-    <Link href="/todaynews" className="bg-navy-500 relative block h-101.5 w-89.5 rounded-2xl">
+    <div
+      onClick={() => router.push('/todaynews')}
+      className="bg-navy-500 relative block h-101.5 w-89.5 cursor-pointer rounded-2xl"
+    >
       <p className="text-text-1-w mt-8 ml-6 h-[108px] w-[215px] text-left text-[26px] leading-[36px] font-extrabold">
         오늘의 핵심 뉴스
         <br />
@@ -30,7 +35,9 @@ export default function NewsDesk({ articles }: Props) {
         height={261}
         className="absolute top-0 right-0"
       />
-      <HeadlineSlider titles={articles.map((a) => a.title)} />
-    </Link>
+      <div onClick={(e) => e.stopPropagation()}>
+        <HeadlineSlider items={articles.map(({ id, title }) => ({ id, title }))} />
+      </div>
+    </div>
   );
 }

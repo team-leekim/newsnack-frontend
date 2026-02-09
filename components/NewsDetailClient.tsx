@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { formatKSTDateTime } from '@/utils/time';
 import { ContentDetailResponse } from '@/types/contentDetail';
 import Image from 'next/image';
+import MainHeader from './header/MainHeader';
 
 export default function NewsDetailClient({ data }: { data: ContentDetailResponse }) {
   const normalizeReactionStats = (stats: Record<string, number>) => ({
@@ -33,9 +34,27 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
     }
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: data.title,
+      text: data.title,
+      url: typeof window !== 'undefined' ? window.location.href : '',
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        alert('링크가 클립보드에 복사되었습니다.');
+      }
+    } catch (e) {}
+  };
+
   return (
     <main className="flex flex-col items-center justify-center">
-      <div className="w-[390px] py-6">
+      <MainHeader />
+      <div className="w-[390px]">
         {/* Webtoon */}
         <section className="w-full">
           <MainViewer
@@ -75,6 +94,14 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
               {' '}
               {formatKSTDateTime(data.publishedAt)}
             </span>
+            <Image
+              alt="share"
+              src={'/share.svg'}
+              width={24}
+              height={24}
+              onClick={handleShare}
+              className="ml-auto cursor-pointer"
+            />
           </div>
         </header>
 

@@ -3,6 +3,7 @@ import EditorSection from '@/components/section/EditorSection';
 import EditorNewsCard from '@/components/EditorNewsCard';
 import { getEditorDetail } from '@/api/editor';
 import { EditorDetailResponse } from '@/types/editor';
+import MainHeader from '@/components/header/MainHeader';
 
 export default async function EditorPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -22,6 +23,7 @@ export default async function EditorPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="mx-auto w-[390px]">
+      <MainHeader />
       <div className="bg-navy-0 px-4 py-2">
         <EditorSection editor={editor} />
       </div>
