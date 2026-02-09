@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { formatKSTDateTime } from '@/utils/time';
 import { ContentDetailResponse } from '@/types/contentDetail';
 import Image from 'next/image';
+import MainHeader from './header/MainHeader';
 
 export default function NewsDetailClient({ data }: { data: ContentDetailResponse }) {
   const normalizeReactionStats = (stats: Record<string, number>) => ({
@@ -35,7 +36,8 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
 
   return (
     <main className="flex flex-col items-center justify-center">
-      <div className="w-[390px] py-6">
+      <MainHeader />
+      <div className="w-[390px]">
         {/* Webtoon */}
         <section className="w-full">
           <MainViewer

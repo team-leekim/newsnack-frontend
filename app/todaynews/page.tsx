@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getTodayNewsSnack } from '@/api/newsnack';
 import { TodayNewsSnackResponse } from '@/types/newsnack';
 import Image from 'next/image';
+import MainHeader from '@/components/header/MainHeader';
 
 export default function TodayNewsPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -192,14 +193,8 @@ export default function TodayNewsPage() {
       `}</style>
 
       <div className="mx-auto w-[390px]">
+        <MainHeader />
         <div className="relative aspect-[390/495] w-full overflow-hidden">
-          <Image
-            src="/logo-white.png"
-            alt="logo"
-            height={47}
-            width={154}
-            className="absolute top-[15px] left-[115px] z-10"
-          />
           <video
             ref={videoRef}
             src="/news.mp4"
