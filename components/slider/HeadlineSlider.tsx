@@ -15,6 +15,15 @@ export default function HeadlineSlider({ items, disableLink = false }: HeadlineS
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  useEffect(() => {
+    // 컴포넌트 마운트 후 autoplay 명시적 시작
+    const timer = setTimeout(() => {
+      swiperRef.current?.autoplay?.start();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-navy-200 relative mt-6 ml-4 flex h-[147px] w-[326px] justify-center overflow-hidden rounded-lg p-2">
       {disableLink ? (
@@ -34,9 +43,9 @@ export default function HeadlineSlider({ items, disableLink = false }: HeadlineS
         </Link>
       )}
       <Swiper
+        key="headline-swiper"
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
-          swiper.autoplay.start();
         }}
         onSlideChange={(swiper) => {
           setActiveIndex(swiper.realIndex);
@@ -50,6 +59,7 @@ export default function HeadlineSlider({ items, disableLink = false }: HeadlineS
           delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
+          waitForTransition: false,
         }}
         modules={[Autoplay]}
         className="pointer-events-none h-full"
