@@ -8,7 +8,7 @@ import { Icon } from '@iconify/react';
 import EditorSection from '@/components/section/EditorSection';
 import Divider from '@/components/section/Divider';
 import Link from 'next/link';
-import { formatKSTDateTime } from '@/utils/time';
+import { formatAbsoluteDateTime } from '@/utils/time';
 import { ContentDetailResponse } from '@/types/contentDetail';
 import Image from 'next/image';
 import MainHeader from './header/MainHeader';
@@ -89,7 +89,7 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
             </Link>
             <span className="typo-body-5-r text-text-3">
               {' '}
-              {formatKSTDateTime(data.publishedAt)}
+              {formatAbsoluteDateTime(data.publishedAt)}
             </span>
             <Image
               alt="share"
@@ -176,7 +176,7 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
                   >
                     <p className="typo-body-2-m text-text-1 line-clamp-2">{article.title}</p>
                     <p className="typo-body-5-r text-text-3 mt-1">
-                      {formatKSTDateTime(article.publishedAt)}
+                      {formatAbsoluteDateTime(article.publishedAt)}
                     </p>
                   </a>
                 </li>
