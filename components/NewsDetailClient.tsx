@@ -35,20 +35,17 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
   };
 
   const handleShare = async () => {
-    const shareData = {
-      title: data.title,
-      text: data.title,
-      url: typeof window !== 'undefined' ? window.location.href : '',
-    };
+    const url = typeof window !== 'undefined' ? window.location.href : '';
 
     try {
       if (navigator.share) {
-        await navigator.share(shareData);
+        await navigator.share({ url });
       } else {
-        await navigator.clipboard.writeText(shareData.url);
-        alert('링크가 클립보드에 복사되었습니다.');
+        await navigator.clipboard.writeText(url);
       }
-    } catch (e) {}
+    } catch (e) {
+      // intentionally ignore share errors
+    }
   };
 
   return (

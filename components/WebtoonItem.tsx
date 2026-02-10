@@ -86,7 +86,7 @@ export default function WebtoonItem({
       </section>
 
       {/* title */}
-      <h2 className="text-black-900 typo-body-1-m">{title}</h2>
+      <h2 className="text-black-900 typo-body-1-m mx-4">{title}</h2>
     </article>
   );
 }

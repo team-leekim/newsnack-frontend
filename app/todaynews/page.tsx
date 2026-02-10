@@ -167,9 +167,19 @@ export default function TodayNewsPage() {
       setIsPaused(true);
     } else {
       // resume
+      if (!video || !audio) return;
+
+      // 항상 루프 가능한 정상 상태로 복구
+      directionRef.current = 'forward';
       isPlayingVideoRef.current = true;
+
+      if (video.duration && video.currentTime >= video.duration - 0.1) {
+        video.currentTime = 0;
+      }
+
       await audio.play();
       await video.play();
+
       startVideoLoop();
       setIsPaused(false);
     }
