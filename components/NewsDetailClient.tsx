@@ -136,11 +136,11 @@ export default function NewsDetailClient({ data }: { data: ContentDetailResponse
             <ul className="my-6 grid grid-cols-5 gap-2 text-sm">
               {(
                 [
-                  { key: 'ANGRY', label: '화나요', image: '/angry.png' },
-                  { key: 'SURPRISED', label: '놀라워요', image: '/surprised.png' },
                   { key: 'HAPPY', label: '행복해요', image: '/happy.png' },
+                  { key: 'SURPRISED', label: '놀라워요', image: '/surprised.png' },
                   { key: 'EMPATHY', label: '공감돼요', image: '/empathy.png' },
                   { key: 'SAD', label: '슬퍼요', image: '/sad.png' },
+                  { key: 'ANGRY', label: '화나요', image: '/angry.png' },
                 ] as const
               ).map(({ key, label, image }) => (
                 <li

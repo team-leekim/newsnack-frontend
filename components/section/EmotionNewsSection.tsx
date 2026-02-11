@@ -20,7 +20,7 @@ const emotionOrder: Emotion[] = ['HAPPY', 'SURPRISED', 'EMPATHY', 'SAD', 'ANGRY'
 const emotionLabelMap: Record<Emotion, string> = {
   HAPPY: '행복해요',
   SURPRISED: '놀라워요',
-  EMPATHY: '공감해요',
+  EMPATHY: '공감돼요',
   SAD: '슬퍼요',
   ANGRY: '화나요',
 };
